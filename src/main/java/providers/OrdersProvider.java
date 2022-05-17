@@ -100,15 +100,23 @@ public class OrdersProvider {
     }
 
     public void updatePay(int id) throws SQLException {
-        String sql = "UPDATE ordersA00369145 SET isPay=$ISPAY AND payDate=$PAYDATE WHERE id=$ID";
+        String sql = "UPDATE ordersA00369145 SET isPay=$ISPAY WHERE id=$ID";
         sql = sql.replace("$ISPAY", ""+1);
-        sql = sql.replace("$PAYDATE", "" + new Date().getTime());
+
         sql = sql.replace("$ID", ""+ id);
 
         DBConnection connection = new DBConnection();
         connection.connect();
         connection.commandSQL(sql);
         connection.disconnect();
+
+        sql = "UPDATE ordersA00369145 SET payDate=$PAYDATE WHERE id=$ID";
+        sql = sql.replace("$PAYDATE", "" + new Date().getTime());
+        sql = sql.replace("$ID", ""+ id);
+        connection.connect();
+        connection.commandSQL(sql);
+        connection.disconnect();
+
 
     }
 

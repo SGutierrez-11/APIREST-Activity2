@@ -57,14 +57,14 @@ public class OrdersServices {
     }
 
     @PUT
-    @Path("updateOrder/{orderId}")
+    @Path("updateOrder/{id}")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response updateOrder(@PathParam("orderId") int orderId){
+    public Response updateOrder(@PathParam("id") int id){
         OrdersProvider provider = new OrdersProvider();
         try {
-            provider.updatePay(orderId);
-            return Response.status(200).entity(orderId).build();
+            provider.updatePay(id);
+            return Response.status(200).entity(id).build();
         } catch (SQLException e) {
             return Response.status(500).entity(new Message(""+ e.getMessage())).build();
         }
